@@ -81,7 +81,7 @@ else
     echo -e "Moins de $min_packets_recu paquets ont ete reçus. Envoi du paquet Wake-on-LAN ... \n"
     wakeonlan $wol_mac
     echo -e "Envoi d'une notification pour indiquer qu'un signal Wake-on-LAN à été envoyé \n"
-    curl --location "$webhook" --header 'Content-Type: application/json' --data-raw '{"text":"Signal Wake-on-Lan envoyé, si une prochaine notification arrive, ce signal aura échoué <@fpezier>","username": "backuppc"}'
+    curl --location "$webhook" --header 'Content-Type: application/json' --data-raw '{"text":"Signal Wake-on-Lan envoyé, si une prochaine notification arrive, ce signal aura échoué <@user>","username": "backuppc"}'
     heure_wol=$(date)
 fi
 
@@ -104,7 +104,7 @@ then
 else
     echo "Moins de $min_packets_recu paquets ont ete reçus ; la machine ne s'est pas correctement allumée."
     echo -e "Envoi d'une notification en conséquence ... \n"
-    curl --location "$webhook" --header 'Content-Type: application/json' --data-raw '{"text":"La machine de backup est toujours éteinte ; voici les différents ping pouvant permettre à une étude plus approfondie : \n '"${packets_recu::-3}"' <@fpezier>","username": "backuppc"}'
+    curl --location "$webhook" --header 'Content-Type: application/json' --data-raw '{"text":"La machine de backup est toujours éteinte ; voici les différents ping pouvant permettre à une étude plus approfondie : \n '"${packets_recu::-3}"' <@user>","username": "backuppc"}'
 fi
 
 rm -rf $FICHIER_LOCK # Suppresion du fichier pour signaler la fin de l'execution
